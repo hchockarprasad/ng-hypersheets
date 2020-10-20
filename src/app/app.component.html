@@ -5,14 +5,48 @@
     width="600"
     height="400"
   ></canvas>
-  <div style="position: absolute; overflow: hidden; left: 40px; top: 20px; width: 560px; height: 400px">
-    <div #scrollerContainer style="position: absolute; width: 560px; height: 400px; overflow: hidden">
-      <div #scroller style="display: block; position: absolute; width: 3960px; height: 10000px">
+  <div style="position: absolute; overflow: hidden; left: 40px; top: 20px; width: 560px; height: 380px">
+    <div #scrollerContainer style="position: absolute; width: 560px; height: 380px; overflow: hidden">
+      <div #scroller style="display: block; position: absolute; width: 39960px; height: 1999980px">
         <div
           #placeholder
           style="height: 20px; position: absolute; width: 100px; border: 1px solid black; box-sizing: border-box"
         ></div>
       </div>
     </div>
+  </div>
+  <div
+    (scroll)="onVScroll()"
+    #vScrollContainer
+    style="
+      height: 400px;
+      width: 15px;
+      position: absolute;
+      top: 0px;
+      left: 600px;
+      border: 1px solid brown;
+      box-sizing: border-box;
+      overflow: hidden;
+      overflow-y: scroll;
+    "
+  >
+    <div style="width: 15px; height: 1999980px; position: absolute"></div>
+  </div>
+  <div
+    (scroll)="onHScroll()"
+    #hScrollContainer
+    style="
+      height: 15px;
+      width: 560px;
+      position: absolute;
+      top: 400px;
+      left: 40px;
+      border: 1px solid brown;
+      box-sizing: border-box;
+      overflow: hidden;
+      overflow-x: scroll;
+    "
+  >
+    <div style="height: 15px; width: 39960px; position: absolute"></div>
   </div>
 </div>
