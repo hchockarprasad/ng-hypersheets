@@ -57,13 +57,6 @@ export class AppComponent implements OnInit, AfterViewInit {
   }
 
   moveDown() {
-    let phDiff = this.placeholder.nativeElement.offsetTop - this.scrollerContainer.nativeElement.scrollTop;
-    if (phDiff < 0) {
-      this.scrollerContainer.nativeElement.scrollTop += phDiff;
-      this.vScroller.nativeElement.scrollTop = this.scrollerContainer.nativeElement.scrollTop;
-      this.onScrolled();
-      return;
-    }
     let jumpValue = 20;
     let phTop = this.placeholder.nativeElement.offsetTop;
     if (phTop <= scrollerHeight - jumpValue - cellHeight) {
@@ -83,18 +76,6 @@ export class AppComponent implements OnInit, AfterViewInit {
   }
 
   moveRight() {
-    let phDiff = this.placeholder.nativeElement.offsetLeft - this.scrollerContainer.nativeElement.scrollLeft;
-    if (phDiff < 0) {
-      this.scrollerContainer.nativeElement.scrollLeft += phDiff;
-      this.hScroller.nativeElement.scrollLeft = this.scrollerContainer.nativeElement.scrollLeft;
-      this.onScrolled();
-      return;
-    }
-    if (this.scrollerContainer.nativeElement.scrollLeft !== this.hScroller.nativeElement.scrollLeft) {
-      this.hScroller.nativeElement.scrollLeft = this.scrollerContainer.nativeElement.scrollLeft;
-      this.onScrolled();
-      return;
-    }
     let jumpValue = 100;
     let phleft = this.placeholder.nativeElement.offsetLeft;
     if (phleft <= scrollerWidth - jumpValue - cellWidth) {
@@ -113,13 +94,6 @@ export class AppComponent implements OnInit, AfterViewInit {
   }
 
   moveLeft() {
-    let phDiff = this.placeholder.nativeElement.offsetLeft - this.scrollerContainer.nativeElement.scrollLeft;
-    if (phDiff < 0) {
-      this.scrollerContainer.nativeElement.scrollLeft += phDiff;
-      this.hScroller.nativeElement.scrollLeft = this.scrollerContainer.nativeElement.scrollLeft;
-      this.onScrolled();
-      return;
-    }
     let jumpValue = 100;
     let phleft = this.placeholder.nativeElement.offsetLeft;
     let res = phleft - jumpValue;
@@ -139,13 +113,6 @@ export class AppComponent implements OnInit, AfterViewInit {
   }
 
   moveTop() {
-    let phDiff = this.placeholder.nativeElement.offsetTop - this.scrollerContainer.nativeElement.scrollTop;
-    if (phDiff < 0) {
-      this.scrollerContainer.nativeElement.scrollTop += phDiff;
-      this.vScroller.nativeElement.scrollTop = this.scrollerContainer.nativeElement.scrollTop;
-      this.onScrolled();
-      return;
-    }
     let jumpValue = 20;
     let phtop = this.placeholder.nativeElement.offsetTop;
     let res = phtop - jumpValue;
