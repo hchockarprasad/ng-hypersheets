@@ -9,8 +9,8 @@ import {
 } from '@angular/core';
 import { WasmService } from './wasm.service';
 
-const containerWidth = 600;
-const scrollerWidth = 4000;
+const containerWidth = 560;
+const scrollerWidth = 3960;
 const containerHeight = 400;
 const scrollerHeight = 10000;
 const cellWidth = 100;
@@ -81,8 +81,9 @@ export class AppComponent implements OnInit, AfterViewInit {
       let scrollerleft = this.scrollerContainer.nativeElement.scrollLeft;
       let scrollerExtent = scrollerleft + containerWidth;
 
-      let diff = placeHolderExtent - scrollerExtent + 40;
+      let diff = placeHolderExtent - scrollerExtent;
       if (diff > 0) {
+        console.log('gg');
         this.scrollerContainer.nativeElement.scrollLeft += diff;
         console.log(this.scrollerContainer.nativeElement.scrollLeft);
         this.onScrolled();
@@ -148,7 +149,7 @@ export class AppComponent implements OnInit, AfterViewInit {
 
   draw(firstRow, firstCol) {
     let ctx = this.canvas.nativeElement.getContext('2d');
-    ctx.clearRect(0, 0, containerWidth, containerHeight);
+    ctx.clearRect(0, 0, containerWidth + 40, containerHeight);
     let rowOffset = firstRow.offset;
     let colOffset = firstCol.offset + 40;
     let rowidx = firstRow.idx + 1;
@@ -161,14 +162,15 @@ export class AppComponent implements OnInit, AfterViewInit {
       ctx.lineWidth = 0.3;
       ctx.strokeStyle = '#000000';
       ctx.moveTo(40, rowOffset);
-      ctx.lineTo(containerWidth, rowOffset);
+      ctx.lineTo(containerWidth + 40, rowOffset);
       ctx.stroke();
       rowidx += 1;
       rowOffset += cellHeight;
     }
 
     let colidx = firstCol.idx + 1;
-    while (colOffset <= containerWidth) {
+    console.log(colidx);
+    while (colOffset <= containerWidth + 40) {
       ctx.beginPath();
       ctx.rect(colOffset, 0, 100, 20);
       ctx.stroke();
