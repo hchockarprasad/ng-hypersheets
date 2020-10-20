@@ -1,7 +1,18 @@
-<div id="container" style="height: 400px; width: 600px; background-color: brown; position: relative;">
-  <div #scrollerContainer style="position:absolute; width: 600px; height: 400px; overflow: hidden;">
-    <div #scroller style="display: block; position: absolute; width: 10000px; height: 400px;">
-      <div #placeholder style="height: 20px; position: absolute; width: 100px;border: 1px solid black;"></div>
+<div id="container" style="height: 400px; width: 600px; position: relative">
+  <canvas
+    #canvas
+    style="position: absolute; background-color: aliceblue; width: 600px; height: 400px"
+    width="600"
+    height="400"
+  ></canvas>
+  <div style="position: absolute; overflow: hidden; left: 40px; top: 20px; width: 600px; height: 400px">
+    <div #scrollerContainer style="position: absolute; width: 600px; height: 400px; overflow: hidden">
+      <div #scroller style="display: block; position: absolute; width: 4000px; height: 10000px">
+        <div
+          #placeholder
+          style="height: 20px; position: absolute; width: 100px; border: 1px solid black; box-sizing: border-box"
+        ></div>
+      </div>
     </div>
   </div>
 </div>
