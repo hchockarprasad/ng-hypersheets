@@ -6,11 +6,15 @@
     height="400"
   ></canvas>
   <div style="position: absolute; overflow: hidden; left: 40px; top: 20px; width: 560px; height: 380px">
-    <div #scrollerContainer style="position: absolute; width: 560px; height: 380px; overflow: hidden">
-      <div #scroller style="display: block; position: absolute; width: 39960px; height: 1999980px">
+    <div
+      #scrollerContainer
+      style="position: absolute; width: 560px; height: 380px; overflow: hidden"
+      (click)="onClick($event)"
+    >
+      <div #scroller style="display: block; position: absolute; width: 20000px; height: 1245560px">
         <div
           #placeholder
-          style="height: 20px; position: absolute; width: 100px; border: 1px solid black; box-sizing: border-box"
+          style="height: 20px; position: absolute; width: 85px; border: 1px solid black; box-sizing: border-box"
         ></div>
       </div>
     </div>
@@ -30,7 +34,7 @@
       overflow-y: scroll;
     "
   >
-    <div style="width: 15px; height: 1999980px; position: absolute"></div>
+    <div style="width: 15px; height: 1245560px; position: absolute"></div>
   </div>
   <div
     (scroll)="onHScroll()"
@@ -47,6 +51,6 @@
       overflow-x: scroll;
     "
   >
-    <div style="height: 15px; width: 39960px; position: absolute"></div>
+    <div style="height: 15px; width: 20000px; position: absolute"></div>
   </div>
 </div>

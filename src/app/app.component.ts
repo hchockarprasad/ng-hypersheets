@@ -8,12 +8,13 @@ import {
   AfterViewInit,
 } from '@angular/core';
 import { WasmService } from './wasm.service';
+import { HyperSheet } from 'hypersheets';
 
 const containerWidth = 560;
-const scrollerWidth = 39960;
+const scrollerWidth = 20000;
 const containerHeight = 380;
-const scrollerHeight = 1999980;
-const cellWidth = 100;
+const scrollerHeight = 1245560;
+const cellWidth = 85;
 const cellHeight = 20;
 
 @Component({
@@ -24,32 +25,46 @@ const cellHeight = 20;
 export class AppComponent implements OnInit, AfterViewInit {
   title = 'ng-hypersheets';
   @ViewChild('placeholder') placeholder: ElementRef<HTMLInputElement>;
-  @ViewChild('scroller') scroller: ElementRef<HTMLInputElement>;
   @ViewChild('canvas') canvas: ElementRef<HTMLCanvasElement>;
   @ViewChild('hScrollContainer') hScroller: ElementRef<HTMLElement>;
   @ViewChild('vScrollContainer') vScroller: ElementRef<HTMLElement>;
   @ViewChild('scrollerContainer') scrollerContainer: ElementRef<HTMLInputElement>;
+
+  sheet: HyperSheet;
+
   constructor(private wasmService: WasmService, private cdr: ChangeDetectorRef) {}
 
   ngOnInit() {
     this.wasmService.init();
-    setTimeout(() => {}, 2000);
+    setTimeout(() => {
+      this.sheet = this.wasmService.createHyperSheet(
+        this.canvas.nativeElement,
+        this.hScroller.nativeElement,
+        this.vScroller.nativeElement,
+        this.scrollerContainer.nativeElement,
+        this.placeholder.nativeElement
+      );
+    }, 1000);
   }
 
   @HostListener('document:keydown.ArrowRight', ['$event']) onArrowRight(e) {
-    this.moveRight();
+    this.sheet.on_right_arrow_keydown(e);
+    // this.moveRight();
   }
 
   @HostListener('document:keydown.ArrowLeft', ['$event']) onArrowLeft(e) {
-    this.moveLeft();
+    this.sheet.on_left_arrow_keydown(e);
+    // this.moveLeft();
   }
 
   @HostListener('document:keydown.ArrowDown', ['$event']) onArrowDown(e) {
-    this.moveDown();
+    this.sheet.on_down_arrow_keydown(e);
+    // this.moveDown();
   }
 
   @HostListener('document:keydown.ArrowUp', ['$event']) onArrowUp(e) {
-    this.moveTop();
+    this.sheet.on_up_arrow_keydown(e);
+    // this.moveTop();
   }
 
   ngAfterViewInit() {
@@ -76,7 +91,7 @@ export class AppComponent implements OnInit, AfterViewInit {
   }
 
   moveRight() {
-    let jumpValue = 100;
+    let jumpValue = 85;
     let phleft = this.placeholder.nativeElement.offsetLeft;
     if (phleft <= scrollerWidth - jumpValue - cellWidth) {
       this.placeholder.nativeElement.style.left = phleft + jumpValue + 'px';
@@ -94,7 +109,7 @@ export class AppComponent implements OnInit, AfterViewInit {
   }
 
   moveLeft() {
-    let jumpValue = 100;
+    let jumpValue = 85;
     let phleft = this.placeholder.nativeElement.offsetLeft;
     let res = phleft - jumpValue;
     if (res >= 0) {
@@ -141,6 +156,13 @@ export class AppComponent implements OnInit, AfterViewInit {
     this.onScrolled();
   }
 
+  onClick(e: MouseEvent) {
+    const rowOffset = this.sheet.get_last_visible_row_offset(e.offsetY);
+    const colOffset = this.sheet.get_last_visible_col_offset(e.offsetX);
+    this.placeholder.nativeElement.style.top = rowOffset + 'px';
+    this.placeholder.nativeElement.style.left = colOffset + 'px';
+  }
+
   onScrolled() {
     const scrollLeft = this.scrollerContainer.nativeElement.scrollLeft;
     const scrollTop = this.scrollerContainer.nativeElement.scrollTop;
@@ -184,7 +206,7 @@ export class AppComponent implements OnInit, AfterViewInit {
     let colidx = firstCol.idx + 1;
     while (colOffset <= containerWidth + 40) {
       ctx.beginPath();
-      ctx.rect(colOffset, 0, 100, 20);
+      ctx.rect(colOffset, 0, 85, 20);
       ctx.stroke();
       ctx.fillText(colidx, colOffset + 20 + 20, 15);
       ctx.beginPath();
