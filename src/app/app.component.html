@@ -20,7 +20,7 @@
     </div>
   </div>
   <div
-    (scroll)="onVScroll()"
+    (scroll)="onVScroll($event)"
     #vScrollContainer
     style="
       height: 400px;
@@ -37,7 +37,7 @@
     <div style="width: 15px; height: 1245560px; position: absolute"></div>
   </div>
   <div
-    (scroll)="onHScroll()"
+    (scroll)="onHScroll($event)"
     #hScrollContainer
     style="
       height: 15px;
