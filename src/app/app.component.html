@@ -1,1 +1,56 @@
-<div id="container"></div>
+<div id="container" style="height: 400px; width: 600px; position: relative">
+  <canvas
+    #canvas
+    style="position: absolute; background-color: aliceblue; width: 600px; height: 400px"
+    width="600"
+    height="400"
+  ></canvas>
+  <div style="position: absolute; overflow: hidden; left: 40px; top: 20px; width: 560px; height: 380px">
+    <div
+      #scrollerContainer
+      style="position: absolute; width: 560px; height: 380px; overflow: hidden"
+      (click)="onClick($event)"
+    >
+      <div #scroller style="display: block; position: absolute; width: 20000px; height: 1245560px">
+        <div
+          #placeholder
+          style="height: 20px; position: absolute; width: 85px; border: 1px solid black; box-sizing: border-box"
+        ></div>
+      </div>
+    </div>
+  </div>
+  <div
+    (scroll)="onVScroll($event)"
+    #vScrollContainer
+    style="
+      height: 400px;
+      width: 15px;
+      position: absolute;
+      top: 0px;
+      left: 600px;
+      border: 1px solid brown;
+      box-sizing: border-box;
+      overflow: hidden;
+      overflow-y: scroll;
+    "
+  >
+    <div style="width: 15px; height: 1245560px; position: absolute"></div>
+  </div>
+  <div
+    (scroll)="onHScroll($event)"
+    #hScrollContainer
+    style="
+      height: 15px;
+      width: 560px;
+      position: absolute;
+      top: 400px;
+      left: 40px;
+      border: 1px solid brown;
+      box-sizing: border-box;
+      overflow: hidden;
+      overflow-x: scroll;
+    "
+  >
+    <div style="height: 15px; width: 20000px; position: absolute"></div>
+  </div>
+</div>

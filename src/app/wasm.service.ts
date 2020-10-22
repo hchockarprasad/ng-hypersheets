@@ -7,7 +7,13 @@ export class WasmService {
     this.wasm = await import('hypersheets/hypersheets');
   }
 
-  start() {
-    this.wasm.start();
+  createHyperSheet(
+    canvas: HTMLCanvasElement,
+    hScroller: HTMLElement,
+    vScroller: HTMLElement,
+    scroller: HTMLElement,
+    placeholder: HTMLElement
+  ) {
+    return new this.wasm.HyperSheet(canvas, hScroller, vScroller, scroller, placeholder);
   }
 }
